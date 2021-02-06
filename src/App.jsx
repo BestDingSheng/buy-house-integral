@@ -99,14 +99,14 @@ const App = () => {
     <Fragment>
       <div className="container">
         <Message theme="danger" size="lg"> 上海买房积分计算器
-        
-          <Button
+          {/* <Button
+          target='_blank'
           size='sm'
           href={'https://mp.weixin.qq.com/s/1z3JS0ypfqPg-ti3TBFo9g'}
           theme="primary"
         >
           积分规则明细来源
-        </Button>
+        </Button> */}
         </Message>
         
         <BaseShow data={baseList}></BaseShow>
