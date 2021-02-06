@@ -126,7 +126,7 @@ const APP = () => {
               <Input
                 type="number"
                 value={value}
-                placeholder=""
+                placeholder="请输入月数"
                 onChange={(value) => {
                   setValue(value);
                 }}
