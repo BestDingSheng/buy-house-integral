@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react';
 import { Radio, Cell, Panel, Input, Button, Modal, Message } from 'zarm';
 import { useImmer } from 'use-immer';
+import BaseShow from './BaseShow'
 
 // ['5','10','20'] 目前包含的分值有
 const fenList = ['5', '10', '20'];
-const APP = () => {
+const App = () => {
   const [state, setState] = useImmer({
     family: '',
     socure: '',
@@ -31,10 +32,8 @@ const APP = () => {
     return result;
   };
 
-  const heji = () => {
+  const statistical = () => {
     const result = baseScore() + policyScore();
-    console.log(result);
-
     const modal = Modal.alert({
       className: 'test',
       title: '提示',
@@ -45,81 +44,62 @@ const APP = () => {
     });
   };
 
+  const baseList = [
+    {
+      title: '家庭情况',
+      value: family,
+      list: [
+        { key: '10', value: '家庭 (10分)' },
+        { key: '0', value: '单身 (0分)' },
+      ],
+      onChange: (value) => {
+         setState((dragy) => { dragy.family = value;});
+      }
+    },
+     {
+      title: '户籍情况',
+      value: socure,
+      list: [
+        { key: '10', value: '上海户口 (10分)' },
+        { key: '0', value: '非上海户口 (0分)' },
+      ],
+      onChange: (value) => {
+         setState((dragy) => { dragy.socure = value;});
+      }
+    },
+    {
+      title: '房产情况',
+      value: house,
+      list: [
+        { key: '20', value: '上海无房 (20分)' },
+        // { key: '0', value: '上海有房 (0分)' },
+        { key: '5', value: '上海有房 (5分)' },
+      ],
+      onChange: (value) => {
+         setState((dragy) => { dragy.house = value;});
+      }
+    },
+    {
+      title: '五年内购房情况',
+      isCell:  true,
+      value: buyHouse,
+      list: [
+        { key: '20', value: '无房，5年内无购房记录 (20分)' },
+        { key: '5', value: '有房，5年内无购房记录 (5分)' },
+        { key: '0', value: '无房，5年有有购房记录 (0分)' },
+        { key: '1', value: '有房，5年内有购房记录 (0分)' },
+      ],
+      onChange: (value) => {
+         setState((dragy) => { dragy.buyHouse = value;});
+      }
+    },
+  ];
+
   return (
     <Fragment>
       <div className="container">
-        <Message theme="danger" size="lg">
-          上海买房积分计算器
-        </Message>
-        <Panel title="家庭情况">
-          <div className="box">
-            <Cell>
-              <Radio.Group
-                value={family}
-                onChange={(value) => {
-                  setState((dragy) => {
-                    dragy.family = value;
-                  });
-                }}
-              >
-                <Radio value="10">家庭 (10分)</Radio>
-                <Radio value="0">单身 (0分)</Radio>
-              </Radio.Group>
-            </Cell>
-          </div>
-        </Panel>
-        <Panel title="户籍情况">
-          <div className="box">
-            <Cell>
-              <Radio.Group
-                value={socure}
-                onChange={(value) => {
-                  setState((dragy) => {
-                    dragy.socure = value;
-                  });
-                }}
-              >
-                <Radio value="10">上海户口 (10分)</Radio>
-                <Radio value="0">非上海户口 (0分)</Radio>
-              </Radio.Group>
-            </Cell>
-          </div>
-        </Panel>
-        <Panel title="房产情况">
-          <div className="box">
-            <Cell>
-              <Radio.Group
-                value={house}
-                onChange={(value) => {
-                  setState((dragy) => {
-                    dragy.house = value;
-                  });
-                }}
-              >
-                <Radio value="20">上海无房 (20分)</Radio>
-                <Radio value="0">上海有房 (0分)</Radio>
-              </Radio.Group>
-            </Cell>
-          </div>
-        </Panel>
-        <Panel title="五年内购房情况">
-          <div className="box">
-            <Radio.Group
-              type="cell"
-              value={buyHouse}
-              onChange={(value) => {
-                setState((dragy) => {
-                  dragy.buyHouse = value;
-                });
-              }}
-            >
-              <Radio value="20">无房，5年内无购房记录 (20分)</Radio>
-              <Radio value="5">有房，5年内无购房记录 (5分)</Radio>
-              <Radio value="0">无房，5年有有购房记录 (0分)</Radio>
-              <Radio value="1">有房，5年内有购房记录 (0分)</Radio>
-            </Radio.Group>
-          </div>
-        </Panel>
+        <Message theme="danger" size="lg"> 上海买房积分计算器</Message>
+        <BaseShow data={baseList}></BaseShow>
         <Panel title="2003年1月起到现在的累计社保月数">
           <div className="box">
             <Cell title="社保月数">
@@ -135,8 +115,12 @@ const APP = () => {
           </div>
         </Panel>
 
-        {/* <Button block theme="primary" onClick={jisuan}>计算分数</Button> */}
-        <Button block theme="primary" style={{marginTop: '50px'}} onClick={heji}>
+        <Button
+          block
+          theme="primary"
+          style={{ marginTop: '60px' }}
+          onClick={statistical}
+        >
           计算分数
         </Button>
       </div>
@@ -144,4 +128,4 @@ const APP = () => {
   );
 };
 
-export default APP;
+export default App;
