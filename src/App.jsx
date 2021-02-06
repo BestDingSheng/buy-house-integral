@@ -98,7 +98,17 @@ const App = () => {
   return (
     <Fragment>
       <div className="container">
-        <Message theme="danger" size="lg"> 上海买房积分计算器</Message>
+        <Message theme="danger" size="lg"> 上海买房积分计算器
+        
+          <Button
+          size='sm'
+          href={'https://mp.weixin.qq.com/s/1z3JS0ypfqPg-ti3TBFo9g'}
+          theme="primary"
+        >
+          积分规则明细来源
+        </Button>
+        </Message>
+        
         <BaseShow data={baseList}></BaseShow>
         <Panel title="2003年1月起到现在的累计社保月数">
           <div className="box">
