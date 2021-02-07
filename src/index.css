@@ -1,3 +1,7 @@
 .container {
     padding-bottom: 150px;
-};
+}
+
+.za-panel__header {
+    padding-top: 10px;
+}

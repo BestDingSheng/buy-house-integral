@@ -2,6 +2,8 @@ import React, { Fragment, useState } from 'react';
 import { Radio, Cell, Panel, Input, Button, Modal, Message } from 'zarm';
 import { useImmer } from 'use-immer';
 import BaseShow from './BaseShow'
+import './index.css'
+
 
 // ['5','10','20'] 目前包含的分值有
 const fenList = ['5', '10', '20'];
